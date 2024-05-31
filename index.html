@@ -101,6 +101,56 @@
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
+    document.getElementById("error-btns").addEventListener("click", buttonActions);
+
+    function buttonActions(){
+      const currButton = event.target;
+      if(currButton.innerText == "Console Log"){
+        console.log("Console Log pressed: Here is a console log!");
+      }
+      if(currButton.innerText == "Console Error"){
+        console.error("Console Error pressed: Here is a console error!")
+      }
+      if(currButton.innerText == "Console Count"){
+        console.count("Console Count pressed: number of calls");
+      }
+      if(currButton.innerText == "Console Warn"){
+        console.warn("Console Warn pressed: Here's a warning!");
+      }
+      if(currButton.innerText == "Console Assert"){
+        console.assert(2+2 == 5, "This is an Assert! 2+2 does not equal 5!")
+      }
+      if(currButton.innerText == "Console Clear"){
+        console.clear();
+      }
+      if(currButton.innerText == "Console Dir"){
+        console.dir(document.location);
+      }
+      if(currButton.innerText == "Console dirxml"){
+        console.dirxml(document.querySelector('form'));
+      }
+      if(currButton.innerText == "Console Group Start"){
+        console.group("Group created!");
+      }
+      if(currButton.innerText == "Console Group End"){
+        console.groupEnd("Group created!");
+      }
+      if(currButton.innerText == "Console Table"){
+        console.log("Error buttons table:")
+        console.table(errorBtns);
+      }
+      if(currButton.innerText == "Start Timer"){
+        console.log("Timer started!");
+        console.time("Timer");
+      }
+      if(currButton.innerText == "End Timer"){
+        console.timeEnd("Timer");
+      }
+      if(currButton.innerText == "Console Trace"){
+        console.trace();
+      }
+      
+    }
     // You may move this JS to another file if you wish
   </script>
 </body>
