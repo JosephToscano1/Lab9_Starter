@@ -85,7 +85,20 @@
       <button>Console Trace</button>
       <button>Trigger a Global Error</button>
     </section>
+<!--
+    <div>
+      <span>Test Div that should result in error</span>
+    </div>
+-->
   </main>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "fa37a8491d1a4862942030b795e83d2a"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>
+                        
 
   <script>
     let form = document.querySelector('form');
@@ -101,9 +114,37 @@
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
-    document.getElementById("error-btns").addEventListener("click", buttonActions);
+    if(2 == 2)
+    {
+      let num1 = 2;
+    }
 
-    function buttonActions(){
+    class AgeError extends Error {
+      constructor(message){
+        super(message);
+        this.name = "InputError";
+      }
+    }
+
+    let userAge = prompt("Enter your age:");
+
+    if(userAge < 0)
+    {
+      throw new AgeError("Hey! you can't be negative years old!");
+    }
+
+    try {
+      let magicNumber = num1;
+    } catch (error) {
+      console.error(error);
+    } finally{
+
+      TrackJS.track('Testing TrackJS!');
+                        
+
+      document.getElementById("error-btns").addEventListener("click", buttonActions);
+
+      function buttonActions(){
       const currButton = event.target;
       if(currButton.innerText == "Console Log"){
         console.log("Console Log pressed: Here is a console log!");
@@ -149,6 +190,19 @@
       if(currButton.innerText == "Console Trace"){
         console.trace();
       }
+      if(currButton.innerText == "Trigger a Global Error"){
+        window.onerror = (message, url, lineNumber) => {
+          console.log(`message: ${message}`);
+          console.log(`source: ${url}`);
+          console.log(`lineno: ${lineNumber}`);
+        }
+        const s = 2;
+        s = 5;
+      }
+
+    }
+
+    
       
     }
     // You may move this JS to another file if you wish
